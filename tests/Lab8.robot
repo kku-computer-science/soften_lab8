@@ -4,13 +4,16 @@ Library    SeleniumLibrary
 *** Test Cases ***
 Open Browser
     Open Browser To Login Page
+    Title Should Be    Faculty of Computing
+    Close Browser
 
 *** Keywords ***
 Open Browser To Login Page
-    ${options}=    Evaluate    sys.modules['selenium.webdriver'].FirefoxOptions()    sys
-    Call Method    ${options}    add_argument    --headless
-    Call Method    ${options}    add_argument    --no-sandbox
-    Call Method    ${options}    add_argument    --disable-dev-shm-usage
+    ${chrome_options}=    Evaluate    sys.modules['selenium.webdriver'].ChromeOptions()    sys
+    Call Method    ${chrome_options}    add_argument    --headless
+    Call Method    ${chrome_options}    add_argument    --no-sandbox
+    Call Method    ${chrome_options}    add_argument    --disable-dev-shm-usage
+    Call Method    ${chrome_options}    add_argument    --window-size=1920,1080
 
-    Open Browser    https://computing.kku.ac.th    firefox    options=${options}
-    Close Browser
+    Create Webdriver    Chrome    options=${chrome_options}
+    Go To    https://computing.kku.ac.th
