@@ -9,6 +9,8 @@ Open Browser
 Open Browser To Login Page
     ${options}=    Evaluate    sys.modules['selenium.webdriver'].FirefoxOptions()    sys
     Call Method    ${options}    add_argument    --headless
+    Call Method    ${options}    add_argument    --no-sandbox
+    Call Method    ${options}    add_argument    --disable-dev-shm-usage
 
-    Create Webdriver    Firefox    options=${options}
-    Go To    https://computing.kku.ac.th
+    Open Browser    https://computing.kku.ac.th    firefox    options=${options}
+    Close Browser
